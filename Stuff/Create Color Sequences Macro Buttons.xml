@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<GMA3 DataVersion="1.8.1.0">
+    <Macro Name="Create Color Sequences Macros" Guid="C6 FB A8 E1 C8 C1 10 02 C6 B6 C8 E6 F8 3D 93 D3">
+        <MacroLine />
+        <MacroLine />
+        <MacroLine Command="SetUserVar &quot;_color_start&quot; (Color pool start id)" />
+        <MacroLine Command="SetUserVar &quot;_color_num&quot; (How many colours?)" />
+        <MacroLine Command="SetUserVar &quot;_group_start&quot; (Group pool start id)" />
+        <MacroLine Command="SetUserVar &quot;_group_num&quot; (How many groups?)" />
+        <MacroLine Command="SetUserVar &quot;_sequence_start&quot; (Sequence pool start id)" />
+        <MacroLine Command="SetUserVar &quot;_macro_start&quot; (Macro pool start id)" />
+        <MacroLine Command="SetUserVar &quot;_appearance_start&quot; (Appearance pool start id)" />
+        <MacroLine />
+        <MacroLine Command="Clear" />
+        <MacroLine Command="Clear" />
+        <MacroLine Command="Clear" />
+        <MacroLine Command="Lua &apos;_uv = UserVars(); _macro_start = GetVar(_uv, &quot;_macro_start&quot;) _appearance_start = GetVar(_uv, &quot;_appearance_start&quot;) for i=0, GetVar(_uv, &quot;_group_num&quot;) - 1 do _group_id = GetVar(_uv, &quot;_group_start&quot;) + i; _sequence_id = GetVar(_uv, &quot;_sequence_start&quot;) + i; for j=0, GetVar(_uv, &quot;_color_num&quot;) - 1 do _macro_group  = _macro_start + i*(GetVar(_uv, &quot;_color_num&quot;)); _macro_id = _macro_group + j _color_id = GetVar(_uv, &quot;_color_start&quot;) + j; Cmd(&quot;group &quot; .. tostring(_group_id) .. &quot;at Preset 4.&quot; .. tostring(_color_id)); Cmd(&quot;Store sequence &quot; .. tostring(_sequence_id) .. &quot; /CreateSecondCue&quot;); Cmd(&quot;Delete Macro &quot; .. tostring(_macro_id)); Cmd(&quot;Store Macro &quot; .. tostring(_macro_id) .. &quot;.1 thru 3&quot;); Cmd(&quot;label macro &quot; .. tostring(_macro_id) .. &quot; \&quot;colorbutton &quot; .. tostring(_sequence_id) .. &quot;-&quot; .. tostring(_color_id) .. &quot;\&quot;&quot;); Cmd(&quot;Set Macro &quot; .. tostring(_macro_id) .. &quot;.1 \&quot;Command\&quot; \&quot;goto seq &quot; .. tostring(_sequence_id) .. &quot; cue &quot; .. tostring(j + 1) .. &quot;\&quot;&quot;); Cmd(&quot;Set Macro &quot; .. tostring(_macro_id) .. &quot;.2 \&quot;Command\&quot; \&quot;Assign Appearance &quot; .. tostring(_appearance_start + GetVar(_uv, &quot;_color_num&quot;)) .. &quot; thru &quot; .. tostring(_appearance_start + GetVar(_uv, &quot;_color_num&quot;)*2 - 1) .. &quot; at Macro &quot; .. tostring(_macro_group) .. &quot; thru &quot; .. tostring(_macro_group + GetVar(_uv, &quot;_color_num&quot;) - 1) .. &quot;\&quot;&quot;); Cmd(&quot;Set Macro &quot; .. tostring(_macro_id) .. &quot;.3 \&quot;Command\&quot; \&quot;Assign Appearance &quot; .. tostring(_appearance_start + j) .. &quot; at macro &quot; .. tostring(_macro_id) .. &quot;\&quot;&quot;); Cmd(&quot;Assign Appearance &quot; .. tostring(_appearance_start + j + GetVar(_uv, &quot;_color_num&quot;)) .. &quot; at macro &quot; .. tostring(_macro_id)); Cmd(&quot;ClearAll&quot;); end Cmd(&quot;label sequence &quot; .. tostring(_sequence_id) .. &quot; \&quot;Colors Group &quot; .. tostring(_group_id) .. &quot;\&quot;&quot;); end&apos;" />
+        <MacroLine />
+    </Macro>
+</GMA3>
